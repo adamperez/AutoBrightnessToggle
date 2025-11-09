@@ -1,9 +1,9 @@
-name: Build & Publish Release APK
+name: Build and Release APK
 
 on:
   push:
-    branches:
-      - 'master'
+    tags:
+      - 'v*'  # Triggers on version tags like v1.0.0, v1.0.1, etc.
 
 jobs:
   build:
