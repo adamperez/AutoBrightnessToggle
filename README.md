@@ -1,4 +1,4 @@
-## AutoBrightnessToggle
+## Auto Brightness Toggle
 
 I love Auto Brightness ... but I hate when the clouds pass in front of the sun and the room you're in gets a _fraction_ darker and your phone decides "Okay gotta drop the brightness 50%!!!"
 
