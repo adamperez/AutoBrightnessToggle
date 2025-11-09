@@ -6,21 +6,41 @@ on:
       - 'master'
 
 jobs:
-  Gradle:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout code
-        uses: actions/checkout@v2
-      - name: setup jdk
-        uses: actions/setup-java@v1
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          java-version: 11
-      - name: Make Gradle executable
-        run: chmod +x ./gradlew
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
-      - name: Releasing using Hub
-        uses: sangatdesai/release-apk@main
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Rename APK
+        run: |
+          mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/AutoBrightnessTile-${{ github.ref_name }}.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: app/build/outputs/apk/debug/AutoBrightnessTile-${{ github.ref_name }}.apk
+          generate_release_notes: true
+          body: |
+            **Note:** This is an unsigned debug APK. You may see a security warning when installing.
+            
+            To install:
+            1. Download the APK
+            2. Enable "Install from Unknown Sources" in your phone settings
+            3. Open the APK file and install
         env:
           GITHUB_TOKEN: ${{ secrets.APK_TOKEN }}
-          APP_FOLDER: app
