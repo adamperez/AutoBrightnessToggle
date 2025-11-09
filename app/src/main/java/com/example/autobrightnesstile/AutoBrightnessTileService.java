@@ -8,6 +8,9 @@ import android.service.quicksettings.TileService;
 
 public class AutoBrightnessTileService extends TileService {
 
+    private final android.os.Handler handler = new android.os.Handler();
+    private Runnable pendingUpdate;
+
     @Override
     public void onStartListening() {
         super.onStartListening();
