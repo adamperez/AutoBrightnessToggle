@@ -27,9 +27,21 @@ public class AutoBrightnessTileService extends TileService {
             return;
         }
 
-        // Toggle auto brightness
+        // Update UI immediately for instant feedback
+        Tile tile = getQsTile();
+        if (tile != null) {
+            // Toggle the visual state immediately
+            boolean willBeActive = (tile.getState() != Tile.STATE_ACTIVE);
+            tile.setState(willBeActive ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+            tile.setSubtitle(willBeActive ? "On" : "Off");
+            tile.updateTile();
+        }
+
+        // Toggle auto brightness in background
         toggleAutoBrightness();
-        updateTileState();
+
+        // Verify the actual state after a short delay
+        new android.os.Handler().postDelayed(this::updateTileState, 100);
     }
 
     private void toggleAutoBrightness() {
