@@ -23,24 +23,29 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
 
       - name: Rename APK
         run: |
-          mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/AutoBrightnessTile-${{ github.ref_name }}.apk
+          mv ${{steps.sign_app.outputs.signedReleaseFile}} app/build/outputs/apk/release/AutoBrightnessTile-${{ github.ref_name }}.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: app/build/outputs/apk/debug/AutoBrightnessTile-${{ github.ref_name }}.apk
+          files: app/build/outputs/apk/release/AutoBrightnessTile-${{ github.ref_name }}.apk
           generate_release_notes: true
-          body: |
-            **Note:** This is an unsigned debug APK. You may see a security warning when installing.
-            
-            To install:
-            1. Download the APK
-            2. Enable "Install from Unknown Sources" in your phone settings
-            3. Open the APK file and install
         env:
           GITHUB_TOKEN: ${{ secrets.APK_TOKEN }}
