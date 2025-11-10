@@ -19,3 +19,9 @@ local.properties
 *.iws
 *.ipr
 .DS_Store
+
+# Signing keys - DO NOT COMMIT
+*.jks
+*.keystore
+keystore.txt
+my-release-key.jks
