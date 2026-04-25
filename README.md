@@ -12,5 +12,5 @@ I vibe coded this using Claude Sonnet 4.5 on a free account to work solely for m
 
 ## ☕️ Support
 <a href="https://www.buymeacoffee.com/adamperez">
-  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="150">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200">
 </a>
