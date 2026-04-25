@@ -4,5 +4,13 @@ I love Auto Brightness ... but I hate when the clouds pass in front of the sun a
 
 Annoyingly, there is no native Quick Settings toggle for enabling/disabling Auto Brightness, so here it is! A no-frills Quick Settings toggle for Auto Brightness! Tap to enable or disable!
 
+## 📦 Installing
+Simply navigate to the [Releases](https://github.com/adamperez/AutoBrightnessToggle/releases) page to download the latest one
+
 ## ⚠️ Disclosure
 I vibe coded this using Claude Sonnet 4.5 on a free account to work solely for my Pixel 10. If you use this on another device, I cannot speak to it's functionality. However, feel free to open an issue with some information and I'll see if I can patch it.  
+
+## ☕️ Support
+<a href="https://www.buymeacoffee.com/adamperez">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200">
+</a>
